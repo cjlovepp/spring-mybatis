@@ -1,4 +1,4 @@
-package com.leran.test;
+package com.learn.test;
 
 import org.junit.Before;
 import org.junit.Test;
