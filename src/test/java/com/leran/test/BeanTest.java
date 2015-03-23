@@ -1,7 +1,5 @@
 package com.leran.test;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -9,24 +7,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.learn.web.entity.User;
 
-public class BeanTest extends TestCase {
+public class BeanTest {
 	
 	ApplicationContext applicationContext;
 	
 	@Before
-	public void initContext(){
-		try {
-			
-			applicationContext = new ClassPathXmlApplicationContext("spring-mvc.xml");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+	public void init(){
+			try {
+				
+				applicationContext = new ClassPathXmlApplicationContext("spring-mvc.xml");
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		
-	}
-	
-	@Test
-	public void test11(){
-		assertNotNull(applicationContext);
 	}
 	
 	

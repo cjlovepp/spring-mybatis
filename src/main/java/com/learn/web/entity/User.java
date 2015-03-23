@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
  * @author ghost
  *
  */
-@Repository
 public class User {
 	
 	private String test;
