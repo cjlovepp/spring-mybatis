@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<context:component-scan base-package="com.learn.web" use-default-filters="false">
-		<context:include-filter type="regex" expression="com.learn.web.entity.*"/>
+		<context:include-filter type="regex" expression="com.learn.web.dao.*"/>
 	</context:component-scan>
 	
 	<!-- 使用SpringMVC自带的CommonsMultipartResolver实现多个文件上传的功能 org.springframework.web.multipart.commons.CommonsMultipartResolver -->
@@ -35,6 +35,6 @@
 		</property>
 	</bean>
 
-	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 </beans>
