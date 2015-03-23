@@ -1,5 +1,6 @@
 package com.learn.test;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -27,9 +28,7 @@ public class BeanTest {
 	@Test
 	public void testBean(){
 		User user = applicationContext.getBean(User.class);
-		user.setTest("adfasdf");
-		System.out.println(user.getTest());
-		/*assertNotNull(user);*/
+		Assert.assertNotNull(user);
 	}
 	
 }

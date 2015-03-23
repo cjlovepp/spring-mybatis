@@ -12,46 +12,46 @@
 
 	<context:annotation-config />
 	
-	<!-- 引入配置文件 -->
-	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:jdb.properties</value>
+				<value>classpath:jdbc.properties</value>
 			</list>
 		</property>
 	</bean>
-	
-	数据源
+
+	<!-- baseinfo数据源 -->
 	<bean id="baseDataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${baseinfo.datasource.driverClassName}" />
-		<property name="url" value="${baseinfo.datasource.url}" />
-		<property name="username" value="${baseinfo.datasource.username}" />
-		<property name="password" value="${baseinfo.datasource.password}" />
-		<property name="initialSize" value="${baseinfo.datasource.initialSize}" />
-		<property name="maxActive" value="${baseinfo.datasource.maxActive}" />
-		<property name="minIdle" value="${baseinfo.datasource.minIdle}" />
-		<property name="maxWait" value="${baseinfo.datasource.maxWait}" />
-		<property name="validationQuery" value="${baseinfo.datasource.validationQuery}" />
-		<property name="testOnBorrow" value="${baseinfo.datasource.testOnBorrow}" />
-		<property name="testOnReturn" value="${baseinfo.datasource.testOnReturn}" />
-		<property name="testWhileIdle" value="${baseinfo.datasource.testWhileIdle}" />
-		<property name="timeBetweenEvictionRunsMillis"	value="${baseinfo.datasource.timeBetweenEvictionRunsMillis}" />
+		<property name="driverClassName" value="${datasource.driverClassName}" />
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="initialSize" value="${datasource.initialSize}" />
+		<property name="maxActive" value="${datasource.maxActive}" />
+		<property name="minIdle" value="${datasource.minIdle}" />
+		<property name="maxWait" value="${datasource.maxWait}" />
+		<property name="validationQuery" value="${datasource.validationQuery}" />
+		<property name="testOnBorrow" value="${datasource.testOnBorrow}" />
+		<property name="testOnReturn" value="${datasource.testOnReturn}" />
+		<property name="testWhileIdle" value="${datasource.testWhileIdle}" />
 	</bean>
 
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="baseDataSource" />
-		指定sqlMapConfig总配置文件
+		<!-- 指定sqlMapConfig总配置文件 -->
 		<property name="configLocation">
 			<value>classpath:mybatis-config.xml</value>
 		</property>
-		指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可， 
+		<!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可， 
 			当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 但当如果用Spring 
-			Junit单元测试时，需要把mapper用此方式导入，否则mybatis的mapper.xml会加载不到
+			Junit单元测试时，需要把mapper用此方式导入，否则mybatis的mapper.xml会加载不到 -->
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:com/codyy/project/front/web/mybatis/*-mybatis.xml
+				<value>classpath:com/learn/web/mybatis/*-mybatis.xml
 				</value>
 			</list>
 		</property>
@@ -61,9 +61,10 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
+	<!-- 事务配置 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="rrtBaseDataSource" />
+		<property name="dataSource" ref="baseDataSource" />
 	</bean>
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -84,7 +85,6 @@
 		<aop:pointcut id="txPointcut"
 			expression="execution(* com.codyy.project.front.web.service.*.*(..)) " />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
-	</aop:config> -->
-	
+	</aop:config>
 
 </beans>
